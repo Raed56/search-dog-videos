@@ -3,9 +3,11 @@ import React, { useState } from "react";
 function SearchVideos() {
     const [query, setQuery] = useState("");
 
+    const [videos, setVideos] = useState([]);
+
     const searchVideos = async (e) => {
         e.preventDefault(); //prevent it from actually posting the data by default
-        console.log("submitting");
+        //console.log("submitting"); //test submit
 
         const url = `https://www.googleapis.com/youtube/v3/search?
         key=AIzaSyAmLtGt_mZ3Pv-TWEeNxHdS-CEXJ-Ny6yc&part=snippet&type=video&q=dog+${query}`;
@@ -14,6 +16,8 @@ function SearchVideos() {
             const response = await fetch(url);
             const data = await response.json();
             console.log(data);
+            //console.log(data.results) //tests for videos
+            setVideos(data.results);
         } catch (err) {
             console.error(err);
         }
