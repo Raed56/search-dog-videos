@@ -44,12 +44,21 @@ function SearchVideos() {
             </form>
             <div className="card-list">
                 {videos.map((video) => (
-                    <div className="card">
+                    <div className="card" key={video.id}>
                         <img
                             className="card--image"
-                            src={`https://www.pexels.com/search/dog/${video.poster_path}`} //src is random placeholder for now
-                            alt={video.title + "poster"}
+                            src={`https://www.pexels.com/search/dog/${video.thumbnail}`} //src is random placeholder for now
+                            alt={video.title + "thumbnail"}
                         />
+                        <div className="card--content">
+                            <h3 className="card--title">{video.title}</h3>
+                            <p>
+                                <small>Channel: {video.channel}</small>
+                            </p>
+                            <p className="card--desc">
+                                Description: {video.description}
+                            </p>
+                        </div>
                     </div>
                 ))}
             </div>
