@@ -24,25 +24,39 @@ function SearchVideos() {
     };
 
     return (
-        <form className="form" onSubmit={searchVideos}>
-            <label className="label" htmlFor="query">
-                {" "}
-                Video Name
-            </label>
-            <input
-                className="input"
-                type="text"
-                name="query"
-                placeholder="Dog Videos"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-            />
-            <button className="button" type="submit">
-                Search Video
-            </button>
-        </form>
+        <>
+            <form className="form" onSubmit={searchVideos}>
+                <label className="label" htmlFor="query">
+                    {" "}
+                    Video Name
+                </label>
+                <input
+                    className="input"
+                    type="text"
+                    name="query"
+                    placeholder="Dog Videos"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                />
+                <button className="button" type="submit">
+                    Search Video
+                </button>
+            </form>
+            <div className="card-list">
+                {videos.map((video) => (
+                    <div className="card">
+                        <img
+                            className="card--image"
+                            src={`https://www.pexels.com/search/dog/${video.poster_path}`} //src is random placeholder for now
+                            alt={video.title + "poster"}
+                        />
+                    </div>
+                ))}
+            </div>
+        </>
     );
 }
 
 export default SearchVideos;
 //fix errors with api response
+//fix src for card image
