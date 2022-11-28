@@ -1,6 +1,6 @@
 import React from "react";
 
-function searchVideos() {
+function SearchVideos() {
     return (
         <form className="form">
             <label className="label" htmlFor="query">
@@ -20,4 +20,4 @@ function searchVideos() {
     );
 }
 
-export default searchVideos;
+export default SearchVideos;
