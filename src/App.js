@@ -1,10 +1,12 @@
-import logo from "./logo.svg";
+//import logo from "./logo.svg";
 import "./App.css";
+import searchVideos from "./searchVideos";
 
 function App() {
     return (
         <div className="App">
-            <header className="App-container title">Hello World</header>
+            <h1 className="App-container title">React Dog Searcher</h1>
+            <searchVideos />
         </div>
     );
 }
