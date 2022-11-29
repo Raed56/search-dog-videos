@@ -61,7 +61,7 @@ function SearchVideos() {
             </form>
             <div className="card-list">
                 {videos.map((video) => (
-                    <VideoCard video={video} />
+                    <VideoCard video={video} key={video.id.videoId} />
                 ))}
             </div>
         </>
