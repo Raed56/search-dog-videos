@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./searchvideo.css";
 import VideoComponent from "./VideoComponent";
+import VideoCard from "./VideoCard";
 
 function SearchVideos() {
     const [query, setQuery] = useState("");
@@ -60,26 +61,7 @@ function SearchVideos() {
             </form>
             <div className="card-list">
                 {videos.map((video) => (
-                    <div className="card" key={video.id.videoId}>
-                        <img
-                            className="card--image"
-                            src={`${video.snippet.thumbnails.medium.url}`}
-                            alt={video.snippet.title + "thumbnail"}
-                        />
-                        <div className="card--content">
-                            <h3 className="card--title">
-                                {video.snippet.title}
-                            </h3>
-                            <p>
-                                <small>
-                                    Channel Name: {video.snippet.channelTitle}
-                                </small>
-                            </p>
-                            <p className="card--desc">
-                                Video Description: {video.snippet.description}
-                            </p>
-                        </div>
-                    </div>
+                    <VideoCard video={video} />
                 ))}
             </div>
         </>
