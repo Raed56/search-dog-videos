@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./searchvideo.css";
 import VideoComponent from "./VideoComponent";
 
 function SearchVideos() {
