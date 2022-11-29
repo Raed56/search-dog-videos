@@ -1,31 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function SearchVideos() {
     const [query, setQuery] = useState("");
 
     const [videos, setVideos] = useState([]);
 
-    const searchVideos = async (e) => {
-        e.preventDefault(); //prevent it from actually posting the data by default
-        //console.log("submitting"); //test submit
+    const [sendRequest, setsendRequest] = useState(false);
 
-        const url = `https://www.googleapis.com/youtube/v3/search?
-        key=AIzaSyAmLtGt_mZ3Pv-TWEeNxHdS-CEXJ-Ny6yc&part=snippet&type=video&q=dog+${query}`;
+    useEffect(() => {
+        async function fetchdogData() {
+            const url = `https://www.googleapis.com/youtube/v3/search?key=AIzaSyAmLtGt_mZ3Pv-TWEeNxHdS-CEXJ-Ny6yc&part=snippet&type=video&q=dog+${query}`;
 
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            console.log(data);
-            //console.log(data.results) //tests for videos
-            setVideos(data.results);
-        } catch (err) {
-            console.error(err);
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                console.log(data);
+                console.log(data.results); //tests for videos
+                setVideos(data.results);
+                setsendRequest(false);
+            } catch (err) {
+                console.error(err);
+            }
         }
-    };
+        fetchdogData();
+    }, [sendRequest]);
 
     return (
         <>
-            <form className="form" onSubmit={searchVideos}>
+            <form className="form">
                 <label className="label" htmlFor="query">
                     {" "}
                     Video Name
@@ -38,7 +40,11 @@ function SearchVideos() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
-                <button className="button" type="submit">
+                <button
+                    className="button"
+                    type="submit"
+                    onClick={() => setsendRequest(true)}
+                >
                     Search Video
                 </button>
             </form>
