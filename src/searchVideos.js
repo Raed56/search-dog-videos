@@ -62,7 +62,7 @@ function SearchVideos() {
                     <div className="card" key={video.id.videoId}>
                         <img
                             className="card--image"
-                            src={`${video.snippet.thumbnails.medium.url}`} //src is random placeholder for now
+                            src={`${video.snippet.thumbnails.medium.url}`}
                             alt={video.snippet.title + "thumbnail"}
                         />
                         <div className="card--content">
@@ -86,5 +86,9 @@ function SearchVideos() {
 }
 
 export default SearchVideos;
-//fix errors with api response
-//fix src for card image
+//fix errors with api response - done
+//fix src for card image - done
+//use react router to call second VideoComponent for single video
+//videoComponent has to display video, title, channel name for the single videos
+//allow search in second video component
+//implement infinite scorlling/pagination on home component for multiple videos
