@@ -3,7 +3,7 @@ import "./videocard.css";
 
 function VideoCard({ video }) {
     return (
-        <div className="card">
+        <div className="card container">
             <img
                 className="card--image"
                 src={`${video.snippet.thumbnails.medium.url}`}

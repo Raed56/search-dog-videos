@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./searchvideo.css";
-import VideoComponent from "./VideoComponent";
+//import VideoComponent from "./VideoComponent";
 import VideoCard from "./VideoCard";
 
 function SearchVideos() {
@@ -10,14 +10,14 @@ function SearchVideos() {
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log("hereheehererer");
+        //console.log("hereheehererer");
         fetch(
             `https://www.googleapis.com/youtube/v3/search?key=AIzaSyAmLtGt_mZ3Pv-TWEeNxHdS-CEXJ-Ny6yc&part=snippet&type=video&q=dog+${query}`
         )
             .then((data) => data.json())
             .then((data) => {
-                console.log(data);
-                console.log(data.items);
+                //console.log(data);
+                //console.log(data.items);
                 setVideos(data.items);
             });
     };
@@ -71,6 +71,7 @@ function SearchVideos() {
 export default SearchVideos;
 //fix errors with api response - done
 //fix src for card image - done
+//add styling to cards and components
 //use react router to call second VideoComponent for single video
 //videoComponent has to display video, title, channel name for the single videos
 //allow search in second video component
