@@ -2,82 +2,50 @@ import React, { useRef, useState, useCallback, useEffect } from "react";
 import "./searchvideo.css";
 //import VideoComponent from "./VideoComponent";
 import VideoCard from "./VideoCard";
+import useYoutubeApi from "./useYoutubeApi";
 
 function SearchVideos() {
     const [query, setQuery] = useState("");
+    const [numberOfVideos, setNumberOfVideos] = useState(5);
+    const [clickedSearch, setClickedSearch] = useState(false);
 
-    const [videos, setVideos] = useState([]);
-
-    const [callApi, setCallApi] = useState(false);
-    const [hasMore, setHasMore] = useState(false);
-
-    useEffect(() => {
-        console.log("Hello inside useEffect with callApi: ", callApi);
-
-        if (!callApi) {
-            return;
-        }
-
-        console.log("Hello useEffect");
-
-        fetch(
-            `https://www.googleapis.com/youtube/v3/search?key=AIzaSyAmLtGt_mZ3Pv-TWEeNxHdS-CEXJ-Ny6yc&part=snippet&type=video&q=dog+${query}`
-        )
-            .then((data) => data.json())
-            .then((data) => {
-                console.log("New data: ", data);
-                //console.log(data);
-                //console.log(data.items);
-                // setVideos(data.items);
-            })
-            .catch((e) => {
-                console.log("Error", e);
-            });
-    }, [callApi]);
+    const { videos, hasMore, loading, error } = useYoutubeApi(
+        query,
+        numberOfVideos
+    );
 
     const observer = useRef();
 
     const lastVideoElement = useCallback(
         (videoNode) => {
-            console.log("Hello");
+            if (loading) {
+                return;
+            }
 
             if (observer.current) {
                 observer.current.disconnect();
             }
 
-            console.log("Hello after disconnect");
-
             observer.current = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    console.log("Hello setApiTrue");
-                    setCallApi(true);
+                if (entries[0].isIntersecting && hasMore) {
+                    //   console.log("Hello setApiTrue");
+                    setNumberOfVideos((prev) => prev + 6);
                 }
             });
 
             if (videoNode) {
-                console.log("Hello observe");
+                // console.log("Hello observe");
                 observer.current.observe(videoNode);
             }
         },
-        [hasMore]
+        [loading, hasMore]
     );
 
     const handleClick = (e) => {
         e.preventDefault();
-        //console.log("hereheehererer");
-        fetch(
-            `https://www.googleapis.com/youtube/v3/search?key=AIzaSyAmLtGt_mZ3Pv-TWEeNxHdS-CEXJ-Ny6yc&part=snippet&type=video&q=dog+${query}`
-        )
-            .then((data) => data.json())
-            .then((data) => {
-                //console.log(data);
-                //console.log(data.items);
-                setVideos(data.items);
-                setHasMore(true);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+        if (!clickedSearch) {
+            setClickedSearch(true);
+        }
     };
 
     return (
@@ -99,20 +67,29 @@ function SearchVideos() {
                     Search Video
                 </button>
             </form>
-            <div className="card-list">
-                {videos.map((video, index) => {
-                    if (videos.length === index + 1) {
-                        <div ref={lastVideoElement} key={video.id.videoId}>
-                            <VideoCard video={video} />
-                        </div>;
-                    }
-                    return (
-                        <div key={video.id.videoId}>
-                            <VideoCard video={video} />
-                        </div>
-                    );
-                })}
-            </div>
+            {clickedSearch && (
+                <div className="card-list">
+                    {videos.map((video, index) => {
+                        if (videos.length === index + 1) {
+                            return (
+                                <div
+                                    ref={lastVideoElement}
+                                    key={video.id.videoId}
+                                    className="lastElement"
+                                >
+                                    <VideoCard video={video} />
+                                </div>
+                            );
+                        } else {
+                            return (
+                                <div key={video.id.videoId}>
+                                    <VideoCard video={video} />
+                                </div>
+                            );
+                        }
+                    })}
+                </div>
+            )}
         </>
     );
 }
