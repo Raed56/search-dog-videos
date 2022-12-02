@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import "./searchvideo.css";
 //import VideoComponent from "./VideoComponent";
 import VideoCard from "./VideoCard";
@@ -9,10 +9,7 @@ function SearchVideos() {
     const [numberOfVideos, setNumberOfVideos] = useState(5);
     const [clickedSearch, setClickedSearch] = useState(false);
 
-    const { videos, hasMore, loading, error } = useYoutubeApi(
-        query,
-        numberOfVideos
-    );
+    const { videos, hasMore, loading } = useYoutubeApi(query, numberOfVideos);
 
     const observer = useRef();
 
@@ -97,8 +94,8 @@ function SearchVideos() {
 export default SearchVideos;
 //fix errors with api response - done
 //fix src for card image - done
-//add styling to carda and components
+//add styling to cards and components
 //use react router to call second VideoComponent for single video
 //videoComponent has to display video, title, channel name for the single videos
 //allow search in second video component
-//implement infinite scorlling/pagination on home component for multiple videos
+//implement infinite scorlling/pagination on home component for multiple videos -done
