@@ -18,3 +18,14 @@
     max-width: 1000px;
     padding: 40px;
 }
+
+.title {
+    font-size: 4rem;
+    font-family: "Sofia";
+    text-align: center;
+    border-style: solid;
+    border-radius: 50px;
+    border-color: #ffdead;
+    background-color: #ffe4c4;
+    padding: 30px;
+}

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Sofia");
+
 body {
     margin: 0;
     padding: 0;
@@ -28,9 +30,4 @@ small {
 
 p {
     font-size: 1.6rem;
-}
-
-.title {
-    font-size: 4rem;
-    text-align: center;
 }

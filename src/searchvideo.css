@@ -6,6 +6,12 @@
     font-size: 1.2rem;
     margin-bottom: 0.2rem;
     text-transform: uppercase;
+    padding: 8px;
+    font-family: "Sofia";
+    border: 1px solid;
+    border-color: #ffdead;
+    background-color: #ffe4c4;
+    border-radius: 20px;
 }
 
 .input {
@@ -15,6 +21,7 @@
     border-radius: 28px;
     border: 1px solid #ddd;
     margin-bottom: 1rem;
+    font-family: "Sofia";
 }
 
 .button {
@@ -26,6 +33,7 @@
     font-size: 1.4rem;
     cursor: pointer;
     transition: background-color 250ms;
+    font-family: "Sofia";
 }
 
 .button:hover {
